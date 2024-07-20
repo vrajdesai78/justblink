@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import Image from "next/image";
@@ -12,6 +13,32 @@ export default function CreateCollection() {
   const [description, setDescription] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isImageUploading, setIsImageUploading] = useState<boolean>(false);
+
+  const uploadFile = async (fileToUpload: File) => {
+    try {
+      setIsImageUploading(true);
+      const data = new FormData();
+      data.append("file", fileToUpload);
+      const response = await fetch("/api/files", {
+        method: "POST",
+        body: data,
+      });
+      const resData = await response.json();
+      setImageUrl(
+        `${process.env.NEXT_PUBLIC_GATEWAY_URL}/ipfs/${resData.IpfsHash}`
+      );
+      setIsImageUploading(false);
+    } catch (e) {
+      console.log(e);
+      setIsImageUploading(false);
+      toast.error("Failed to upload image, please try again later.", {
+        icon: "🚧",
+        style: {
+          borderRadius: "10px",
+        },
+      });
+    }
+  };
 
   return (
     <Container>
@@ -31,9 +58,9 @@ export default function CreateCollection() {
           </div>
         </div>
         <form className="flex flex-col space-y-4 w-[90%] md:max-w-[600px] mx-auto">
-          <Image
+          <img
             className="mx-auto w-[14rem] h-[14rem] bg-gradient-to-tr from-[#ADE1FF] to-sky-400 rounded-xl object-fill"
-            src={image !== "" ? image : "/preview.png"}
+            src={image ? image : "/preview.png"}
             alt="preview"
             width={200}
             height={200}
@@ -45,13 +72,10 @@ export default function CreateCollection() {
               type="file"
               label="Upload Image"
               accept="image/*"
-              onChange={(e: any) => {
-                setIsImageUploading(true);
+              onChange={async (e) => {
                 const image = URL.createObjectURL(e.target.files[0]);
                 setImage(image);
-                const file = e.target.files;
-                // TODO: implement web3 storage
-                setIsImageUploading(false);
+                await uploadFile(e.target.files[0]);
               }}
             />
           </div>
@@ -94,7 +118,7 @@ export default function CreateCollection() {
             onClick={async (e) => {
               e.preventDefault();
               if (name && description && imageUrl) {
-                // TODO: create collection
+                console.log("Image: 🎒", imageUrl);
               } else {
                 toast("Please fill all the fields", {
                   icon: "🚧",
