@@ -24,9 +24,7 @@ export default function CreateCollection() {
         body: data,
       });
       const resData = await response.json();
-      setImageUrl(
-        `${process.env.NEXT_PUBLIC_GATEWAY_URL}/ipfs/${resData.IpfsHash}`
-      );
+      setImageUrl(`${process.env.NEXT_PUBLIC_GATEWAY_URL}/ipfs/${resData.IpfsHash}`);
       setIsImageUploading(false);
     } catch (e) {
       console.log(e);
@@ -48,12 +46,10 @@ export default function CreateCollection() {
             <Image src="/nft.png" width="120" height="120" alt="Icon" />
           </div>
           <div className="py-8 text-white text-right">
-            <div className="font-semibold text-2xl mb-2">
-              Create a Collection
-            </div>
+            <div className="font-semibold text-2xl mb-2">Create a Collection</div>
             <div className="font-medium text-md mb-2 text-neutral-100">
-              Monetize your community to grant access and benefits. <br />{" "}
-              Specially designed for creators and guilds.
+              Monetize your community to grant access and benefits. <br /> Specially designed for
+              creators and guilds.
             </div>
           </div>
         </div>
@@ -85,9 +81,7 @@ export default function CreateCollection() {
             label="Name"
             type="text"
             placeholder="Send storms"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setName(e.target.value)
-            }
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
             value={name}
             helper="This Can Be Your DAO Name or Special Access Collection"
           />
@@ -97,9 +91,7 @@ export default function CreateCollection() {
             label="Description"
             type="text"
             placeholder="Send storm is a collection of 10,000 unique NFTs."
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setDescription(e.target.value)
-            }
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDescription(e.target.value)}
             value={description}
             helper="Write Something About This NFT or Features"
           />
@@ -134,8 +126,8 @@ export default function CreateCollection() {
             {isImageUploading
               ? "Uploading Image..."
               : isLoading
-              ? "Cookin collection..."
-              : "Create collection 🚀"}
+                ? "Cookin collection..."
+                : "Create collection 🚀"}
           </button>
         </form>
       </div>

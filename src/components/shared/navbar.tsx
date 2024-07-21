@@ -28,13 +28,7 @@ export default function Navbar() {
             href="/"
             className="flex gap-5 items-center text-2xl text-transparent bg-clip-text bg-gradient-to-b from-violet-500 from-[20%] to-indigo-600 font-semibold whitespace-nowrap"
           >
-            <Image
-              src="/justblink.png"
-              alt="logo"
-              width={40}
-              height={40}
-              className="w-7 h-7"
-            />
+            <Image src="/justblink.png" alt="logo" width={40} height={40} className="w-7 h-7" />
             justblink
           </Link>
         </div>
@@ -66,9 +60,7 @@ export default function Navbar() {
           )}
         </button>
         <div
-          className={`w-full lg:block lg:w-auto ${
-            isMobileMenuOpen ? "block" : "hidden"
-          }`}
+          className={`w-full lg:block lg:w-auto ${isMobileMenuOpen ? "block" : "hidden"}`}
           id="navbar-default"
         >
           <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-10 rtl:space-x-reverse md:mt-0">

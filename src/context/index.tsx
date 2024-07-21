@@ -1,11 +1,7 @@
 "use client";
 import { UnifiedWalletProvider } from "@jup-ag/wallet-adapter";
 
-export default function WalletProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function WalletProvider({ children }: { children: React.ReactNode }) {
   return (
     <UnifiedWalletProvider
       wallets={[]}
